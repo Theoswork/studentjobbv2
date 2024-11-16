@@ -335,6 +335,53 @@ p, ul {
     color: var(--color-primary);
     margin-bottom: 10px;
 }
+/* css/style.css */
+
+/* Layout for three columns */
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.job-list,
+.job-details,
+.login-section {
+    width: 30%; /* Adjust widths as needed */
+}
+
+.login-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 
 /* Responsive design */
 @media (max-width: 768px) {

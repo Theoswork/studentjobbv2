@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studiejobb.se - Hitta ditt nästa jobb</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> <!---länka från html till css-->
-    <script src="js/linkHandler.js"></script>
-    <script src="js/displayJobs.js" defer></script>
-    <script src="formular_data.js"></script>
-    <script src="firebaseConfig.js"></script>
-
+    <link rel="stylesheet" href="css/style.css">
+       <!-- Firebase SDKs -->
+       <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js"></script>
+       <!-- Firebase Configuration and Logic -->
+       <script src="js/firebaseConfig.js"></script>
+       <script src="js/auth.js"></script>
 </head>
 <body>
     <div class="container">
@@ -25,11 +27,11 @@
                 <li><a href="publicerajobb.html">Publicera lediga jobb</a></li>
                 <li><a href="jobbamedoss.html">Jobba med Talangträdet</a></li>
                 <li><a href="omoss.html">Om Oss</a></li>
-                <li><a href="konto/login.html">Logga In / Registrera</a></li>
             </ul>
         </nav>
         
         <div class="content">
+            <!-- Left Column: Filters -->
             <div class="job-list">
                 <input type="text" id="searchBox" placeholder="🔍 Sök jobb..." class="search-box">
                 <input type="text" id="locationFilter" placeholder="📍 Skriv in plats" class="search-box">
@@ -45,6 +47,8 @@
                 <h2>Senaste Jobben</h2>
                 <div id="jobs-container"></div>
             </div>
+            
+            <!-- Middle Column: Welcome Information -->
             <div class="job-details" id="job-details">
                 <h2>Välkommen till Studiejobb.se</h2>
                 <p>Hitta ditt nästa spännande jobb eller praktikplats här på Studiejobb.se!</p>
@@ -63,51 +67,39 @@
                     <li>Regelbundet uppdaterade jobbannonser från olika branscher.</li>
                 </ul>
                 <p>Börja din jobbsökning idag och ta första steget mot din framtida karriär!</p>
-                <p>Logga in</p>
-                <form id="login-form" action="/api/auth/login" method="POST">
+            </div>
+            
+            <!-- Right Column: Login Section -->
+            <div class="login-section">
+                <h3>Logga in</h3>
+                <form id="login-form">
                     <label for="email">E-post</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" placeholder="Ange din e-post" required>
                 
                     <label for="password">Lösenord</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" placeholder="Ange ditt lösenord" required>
                 
                     <button type="submit">Logga in</button>
                 </form>
+                <h3>Skapa Konto</h3>
+                <form id="signup-form">
+                    <label for="signup-email">E-post</label>
+                    <input type="email" id="signup-email" placeholder="Ange din e-post" required>
+                
+                    <label for="signup-password">Lösenord</label>
+                    <input type="password" id="signup-password" placeholder="Ange ditt lösenord" required>
+                
+                    <button type="submit">Skapa Konto</button>
+                </form>
+                <div id="error-message" style="color: red;"></div>
             </div>
         </div>
-            </div>
-        </div>
-            </div>
-            <div id="jobAdsContainer"></div>
 
-<script>
-    async function loadJobAds() {
-        const response = await fetch('/api/jobs');
-        const jobAds = await response.json();
-
-        const container = document.getElementById('jobAdsContainer');
-        jobAds.forEach(job => {
-            const jobAd = document.createElement('div');
-            jobAd.innerHTML = `
-                <h3>${job.title}</h3>
-                <p>${job.description}</p>
-                <p><strong>Företag:</strong> ${job.company}</p>
-                <p><strong>Plats:</strong> ${job.location}</p>
-            `;
-            container.appendChild(jobAd);
-        });
-    }
-
-    loadJobAds();
-</script>
-
-      
-     
-        </div>
-        
         <footer>
             <p>&copy; 2024 Studiejobb.se. Alla rättigheter förbehållna.</p>
         </footer>
     </div>
+
+ 
 </body>
 </html>
